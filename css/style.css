@@ -1,0 +1,193 @@
+/* Animate the logo with key frames; define the keyframe animation first; set up width 
+and opacity*/
+
+@keyframes logoAnimation {
+    0%{
+        width:25px; 
+        opacity: 0;
+    }
+
+    100% {
+        width: 475px;
+        opacity: 1;
+    }
+}
+
+/*apply the animation to the logo element with id = logo;
+set up animation duration and fill mode at the same time*/
+
+#logo {
+    animation-name: logoAnimation;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+}
+
+/* edit the body part, focusing on font-family, background omage, and backround-colour*/
+body {
+    font-family: 'Poppins', serif; /* use poppins font with serif as backup*/
+    background-image: url("../images/concrete_seamless.png"); /* Set the background image*/
+    background-color: #f1f1f1; /* backup background color*/
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav_links {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Step #5
+Style the links so that they have the same color even after they have been visited.*/
+a:link, a:visited {
+    color: blue;
+}
+
+/*Step#6 
+Identify the proper selector to style ONLY those header elements that are direct children of a card class.  
+The required styling is the following: 
+background: #288088,
+solid 2px border using #45ADAD,
+20px of padding on the top and the bottom, 
+50px border-radius on the top left and right corners. 
+*/
+.card > header{
+    background-color: #288088;
+    border: solid 2px #45ADAD;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+}
+
+.card {
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px; 
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+/*Step#7 Edit the css for the card class to match our example. Achieve this by using a flex-property to specify an initial “size” of 450px.  
+You need to think about this from a “flex” perspective and realize that flex-direction will affect the size of the elements.  
+You can see that in the mobile view they all have the same width. */
+.card {
+    flex-basis: 450px;
+}
+
+/*Step#8 Edit the css for the pricing class to match our example. 
+You should use flex and the cards should be centered both horizontally and vertically.*/
+.pricing {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/*step#9 Style the images in the gallery class. These elements will have a solid 10px border with a color of #50C7C7, 10px margin on all four sides and a width of 300px.  
+*/
+.gallery img{
+    border: 10px solid #50C7C7; /* Solid 10px border with color */
+    margin: 10px; /* 10px margin on all sides */
+    width: 300px; /* Set the width to 300px */
+}
+
+/*step#10 Edit the css for the gallery class to use flex to match our example. (You may want to look at the screen shots from 1200px and 1500px as well -  the changes are not from media queries, but from the use of flex.)
+*/ 
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/*Step# 11: Edit the css for the header tag (all instances) 
+and the nav_links class to match our example using flex-properties. 
+The logo should be as far to the left as possible and the links as far to the right as possible. Use flex properties, NOT position properties.
+*/
+@media screen and (min-width: 900px) {
+
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .nav_links{
+        display: flex;
+        flex-direction: row;
+    }
+
+    /*Step #12: Edit the css for the pricing and card classes to match our example. 
+    Part of achieving this is by using a flex-property to specify a “size” of 275px. 
+    Notice that the elements do not have the same height, but do have the same width.
+    */
+    .pricing{
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .card{
+        flex-basis: 275px;
+    }
+
+    /*Step #13 Modify the first header (the one not inside main) so that it remains visible at the top of the screen even as we scroll down. 
+    Make sure that it is always visible.*/
+    a + header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+    }
+}
+
+/*Step #14 The logo class should appear but not be animated if prefers-reduced-motion is selected in the accessibility preferences. */
+@media screen and (prefers-reduced-motion: reduce){
+    #logo {
+        animation: none; /*disable the animation*/
+    }
+}
+
+/*Step #15 style the page for when the page is printed in portrait mode*/
+@media print and (orientation: portrait){
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+    .nav_links{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100vw; /*cover the whole viewport width*/
+    }
+
+    .pricing {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+    }
+
+    .card {
+        
+        border: 2px solid #45ADDD;
+        flex-basis: 325px;
+    }
+
+    #gallery {
+        display: none;
+    }
+
+    .gallery {
+        display: none;
+    }
+
+    main li:nth-child(2)::after{
+        content: "👍";
+        display: inline;
+    }
+}
