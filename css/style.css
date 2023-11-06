@@ -1,41 +1,50 @@
-/* Animate the logo with key frames; define the keyframe animation first; set up width 
+/* Step1: Animate the logo with key frames; define the keyframe animation first; set up width 
 and opacity*/
 
 @keyframes logoAnimation {
     0%{
+        /*Set up initial width*/
         width:25px; 
+        /* Set up initial opacity */
         opacity: 0;
     }
 
     100% {
+        /*Set up ending width*/
         width: 475px;
+        /*Set up ending opacity*/
         opacity: 1;
     }
 }
 
-/*apply the animation to the logo element with id = logo;
+/* apply the animation to the logo element with id = logo;
 set up animation duration and fill mode at the same time*/
-
 #logo {
     animation-name: logoAnimation;
     animation-duration: 5s;
     animation-fill-mode: forwards;
 }
 
-/* edit the body part, focusing on font-family, background omage, and backround-colour*/
+/* Step#2 Edit the body part, focusing on font-family, background omage, and backround-colour*/
 body {
     font-family: 'Poppins', serif; /* use poppins font with serif as backup*/
     background-image: url("../images/concrete_seamless.png"); /* Set the background image*/
     background-color: #f1f1f1; /* backup background color*/
 }
 
+/*Step#3 Edit the css for the header tag (all instances) to use flex to match our example*/
 header {
+    /*Set up the display as flex*/
     display: flex;
+    /*Center it horizontally*/
     justify-content: center;
+    /*Set up flex direction as column*/
     flex-direction: column;
+    /*Set it vertically*/
     align-items: center;
 }
 
+/* Step#4 Edit the css for the nav_links class to use flex to match our example */
 .nav_links {
     display: flex;
     flex-direction: column;
@@ -43,6 +52,7 @@ header {
 
 /*Step #5
 Style the links so that they have the same color even after they have been visited.*/
+/*use pesudo class to choose both clicked and unclick status*/
 a:link, a:visited {
     color: blue;
 }
@@ -64,6 +74,7 @@ solid 2px border using #45ADAD,
     border-top-left-radius: 50px;
 }
 
+/*Because the card behind the header has different border radius, we have to fix it as well*/
 .card {
     border-top-right-radius: 50px;
     border-top-left-radius: 50px; 
@@ -74,18 +85,20 @@ solid 2px border using #45ADAD,
 /*Step#7 Edit the css for the card class to match our example. Achieve this by using a flex-property to specify an initial “size” of 450px.  
 You need to think about this from a “flex” perspective and realize that flex-direction will affect the size of the elements.  
 You can see that in the mobile view they all have the same width. */
+/*flex-direction could affect the size of the elements, so here I use flex-basis instead of width*/
 .card {
     flex-basis: 450px;
 }
 
 /*Step#8 Edit the css for the pricing class to match our example. 
 You should use flex and the cards should be centered both horizontally and vertically.*/
+
 .pricing {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: center;
+    flex-direction: row; /*set up direction*/
+    justify-content: center; /*center the element horizontally*/
+    flex-wrap: wrap; /*set up wrap*/
+    align-content: center; /*center the element vertically*/
 }
 
 /*step#9 Style the images in the gallery class. These elements will have a solid 10px border with a color of #50C7C7, 10px margin on all four sides and a width of 300px.  
@@ -100,26 +113,28 @@ You should use flex and the cards should be centered both horizontally and verti
 */ 
 .gallery {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row; /*set up direction*/
+    flex-wrap: wrap; /*set up wrap*/
+    justify-content: center; /*center the element horizontally*/
 }
 
 /*Step# 11: Edit the css for the header tag (all instances) 
 and the nav_links class to match our example using flex-properties. 
 The logo should be as far to the left as possible and the links as far to the right as possible. Use flex properties, NOT position properties.
 */
+
+/*use media query to set up soecific window size*/
 @media screen and (min-width: 900px) {
 
     header{
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: row; /*change flex direction*/
+        justify-content: space-between; /*change justofy-content for displaying style, ley logo and nav links on each side of the viewport*/
     }
 
     .nav_links{
         display: flex;
-        flex-direction: row;
+        flex-direction: row; /*make nav links in a row instead of the column*/
     }
 
     /*Step #12: Edit the css for the pricing and card classes to match our example. 
@@ -128,18 +143,19 @@ The logo should be as far to the left as possible and the links as far to the ri
     */
     .pricing{
         flex-direction: row;
-        align-items: center;
+        align-items: center; /*pricing card is centered vertically*/
     }
 
     .card{
-        flex-basis: 275px;
+        flex-basis: 275px; /*the width are the same according to flex-direction*/
     }
 
     /*Step #13 Modify the first header (the one not inside main) so that it remains visible at the top of the screen even as we scroll down. 
     Make sure that it is always visible.*/
     a + header {
-        position: sticky;
-        top: 0;
+        position: sticky; /*fix the top bar*/
+        /*set location*/
+        top: 0; 
         width: 100%;
     }
 }
@@ -154,11 +170,13 @@ The logo should be as far to the left as possible and the links as far to the ri
 /*Step #15 style the page for when the page is printed in portrait mode*/
 @media print and (orientation: portrait){
     body {
-        font-family: Arial, Helvetica;
+        /*set up font family and background image*/
+        font-family: Arial, Helvetica; 
         background-image: none;
     }
 
     .nav_links{
+        /*set up the nav_links, as observed in the website, the links spreaded evenly under the logo*/
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
@@ -168,26 +186,25 @@ The logo should be as far to the left as possible and the links as far to the ri
     .pricing {
         display: flex;
         flex-direction: row;
-        align-items: flex-end;
+        align-items: flex-end; /*align pricing card based on bottom*/
         flex-wrap: nowrap;
     }
 
     .card {
-        
-        border: 2px solid #45ADDD;
+        border: 2px solid #45ADDD; /*card style as described*/
         flex-basis: 325px;
     }
 
     #gallery {
-        display: none;
+        display: none; /*get rid of gallery title*/
     }
 
     .gallery {
-        display: none;
+        display: none; /*get rid of gallery pics*/
     }
 
     main li:nth-child(2)::after{
-        content: "👍";
+        content: "👍"; /*add emoji to the end of the second list of each pricing card*/
         display: inline;
     }
 }
